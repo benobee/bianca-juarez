@@ -34,37 +34,20 @@ const productListController = {
         }
     },
     getShopData(collection, options) {
-        //get json data via SQS API and Axios
-        function getShop(url, params) {
-            return axios.get(url, {
-                params
-            });
-        }
-
-        let params = {
+        const params = {
             format: "json"
         };
 
-        let url = collection.dataset.collection;
+        const url = collection.dataset.collection;
 
-        url = url.replace(/\s{1,10}/g, '').split(",");
-
-        const shop1 = getShop('/' + url[0], params);
-
-        const shop2 = getShop('/' + url[1], params);
-
-        axios.all([shop1, shop2])
-            .then(axios.spread((shop1, shop2) => {
-                const data = shop1.data.items.concat(shop2.data.items);
-
-                shop1.data.items = data;
-
-                if (shop1.data.items.length > 0) {
+        axios.get('/' + url, { params })
+            .then((response) => {
+                if (response.data.items.length > 0) {
                     sessionStorage.setItem("shop-data", true);
-                    sessionStorage.setItem("shop", JSON.stringify(shop1.data));
-                    this.renderGallery(shop1.data, options);
+                    sessionStorage.setItem("shop", JSON.stringify(response.data));
+                    this.renderGallery(response.data, options);
                 }
-            }))
+            })
             .catch(function(error) {
                 if (error.response) {
                     // The request was made and the server responded with a status code 

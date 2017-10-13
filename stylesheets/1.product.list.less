@@ -11,13 +11,13 @@
     }
     .load-more {
         padding: 0.5em 1em;
-        background: @magenta;
+        background: @brand;
         color: white;
     }
 }
 
 .back-to-top.button-wrapper {
-    background-color: @magenta;
+    background-color: @brand-extra-light;
     position: fixed;
     bottom: 1rem;
     height: 60px;
@@ -77,12 +77,9 @@
         visibility: visible;
         overflow-x: hidden;
         .loader {
-            background-image: url(https://static1.squarespace.com/static/5185253ce4b0a85f6b896998/t/59deb154268b96c326c1e538/1507766612300/spinner.jpg);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center center; //border: 6px solid @lightgrey; /* Light grey */
-            //border-top: 6px solid @magenta; /* Blue */
-            //border-radius: 50%;
+            border:6px solid @brand-extra-light;
+            border-top: 6px solid @brand;
+            border-radius: 50%;
             width: 55px;
             height: 55px;
             animation: spin 2s linear infinite;
@@ -98,7 +95,7 @@
                     display: none;
                 }
                 @media screen and (max-width:@mobile-break) {
-                    top: 74px;
+                    top: 87px;
                     overflow-y: auto;
                     bottom: 0;
                 }
@@ -137,12 +134,12 @@
         @media screen and (max-width:@mobile-break) {
             overflow: hidden;
             position: fixed;
-            top: 74px;
+            top: 87px;
             bottom: 0;
             background: rgba(10, 10, 10, 0.5);
             &:before {
                 content: "collections & filters";
-                background: @magenta;
+                background: @brand;
                 color: white;
                 text-align: center;
                 width: 100%;
@@ -201,12 +198,12 @@
                     margin: 0;
                 }
                 .hoverState {
-                    border-color: @magenta;
-                    color: @magenta;
+                    border-color: @brand;
+                    color: @brand;
                 }
                 .activeState {
-                    border-color: @magenta;
-                    background: @magenta;
+                    border-color: @brand;
+                    background: @brand;
                     color: white;
                 }
                 &:hover,
@@ -238,8 +235,8 @@
                     border-color: hsl(326, 27%, 90%);
                     transition: all 0.4s;
                     &.active {
-                        border-color: @magenta;
-                        background: @magenta;
+                        border-color: @brand;
+                        background: @brand;
                     }
                     &.meta-tag-enter,
                     .meta-tag-leave-to {
@@ -315,8 +312,13 @@
                 .product-title {
                     text-align: center;
                     width: 100%;
-                    font-size: 0.7em;
+                    font-family: futura-pt;
                     font-weight: 500;
+                    font-style: normal;
+                    font-size: 16px;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                    color:@brand;
                     text-transform: uppercase;
                 }
             }

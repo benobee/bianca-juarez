@@ -13,6 +13,8 @@ const productPageController = {
 
         this.buildTargetElements();
         this.buildComponents();
+
+        console.log(this);
     },
     cacheDOM(parent) {
         this.productDetails = parent.querySelector(".ProductItem-summary");
@@ -89,11 +91,11 @@ const productPageController = {
                     inject.appendChild(form);
 
                     //enter the title into the message form
-                    const subject = document.getElementById('text-yui_3_17_2_49_1506560555564_6186-field');
+                    const subject = document.getElementById('text-yui_3_17_2_21_1507922621033_3860-field');
 
                     const title = document.querySelector(".ProductItem-details-title").innerText;
-                    
-                    const message = document.getElementById('textarea-yui_3_17_2_49_1506560555564_6187-field');
+
+                    const message = document.getElementById('textarea-yui_3_17_2_21_1507922621033_3861');
 
                     subject.value = title;
                     message.value = this.message + title;

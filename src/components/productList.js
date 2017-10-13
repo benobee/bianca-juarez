@@ -306,7 +306,7 @@ const productList = (data, options) => {
                 let top = 0;
 
                 if (window.innerWidth > 960) {
-                    top = 150;
+                    top = 130;
                 }
 
                 const params = {
