@@ -13,8 +13,6 @@ const productPageController = {
 
         this.buildTargetElements();
         this.buildComponents();
-
-        console.log(this);
     },
     cacheDOM(parent) {
         this.productDetails = parent.querySelector(".ProductItem-summary");

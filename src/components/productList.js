@@ -305,7 +305,7 @@ const productList = (data, options) => {
             scrollTop() {
                 let top = 0;
 
-                if (window.innerWidth > 960) {
+                if (window.innerWidth > 800) {
                     top = 130;
                 }
 
