@@ -77,7 +77,7 @@
         visibility: visible;
         overflow-x: hidden;
         .loader {
-            border:6px solid @brand-extra-light;
+            border: 6px solid @brand-extra-light;
             border-top: 6px solid @brand;
             border-radius: 50%;
             width: 55px;
@@ -101,7 +101,7 @@
                 }
                 position:fixed;
                 top:0px;
-                max-width:1290px;
+                max-width:1085px;
                 margin:0 auto;
                 left:0;
                 right:0;
@@ -118,7 +118,7 @@
         flex-wrap: wrap;
         align-items: flex-start;
         width: 100%;
-        transition: 0.6s opacity ease-in-out;
+        transition: 0.3s opacity ease-in-out;
         &.hide {
             opacity: 0;
         }
@@ -148,11 +148,11 @@
                 height: 100%;
                 margin-top: 0em;
                 cursor: pointer;
-                border-bottom: 4px solid hsl(326, 57%, 50%);
+                border-bottom: 0px solid hsl(326, 57%, 50%);
                 position: absolute;
             }
             &.menu-open {
-                border-bottom: 4px solid hsl(326, 57%, 50%);
+                border-bottom: 0px solid hsl(326, 57%, 50%) !important;
             }
             &:not(.menu-open) {
                 max-height: 48px;
@@ -164,6 +164,7 @@
             }
         }
         .filter {
+            transition: 0.3s opacity ease-in-out;
             width: 100%;
             display: flex;
             justify-content: space-around;
@@ -171,7 +172,7 @@
             align-items: center;
             @media screen and (max-width: @mobile-break) {
                 flex-direction:row;
-                width: 50%;
+                width: 100%;
                 margin-top: 48px;
             }
             .item {
@@ -318,7 +319,7 @@
                     font-size: 16px;
                     letter-spacing: 0.05em;
                     text-transform: uppercase;
-                    color:@brand;
+                    color: @brand;
                     text-transform: uppercase;
                 }
             }
