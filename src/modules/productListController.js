@@ -1,33 +1,12 @@
 import Vue from "vue";
 import axios from "axios";
 import { productList, productListImage, backToTopButton } from "../components/index";
-//import JSONData from "./data.json";
-
-const dev = false;
 
 const productListController = {
     init (collection) {
         const options = this.getShopOptions(collection);
 
-        if (dev) {
-
-/*            const data = JSONData;
-        
-            this.renderGallery(data, options);*/
-
-        } else {
-
-            const hasCachedData = sessionStorage.getItem("shop-data", true);
-
-            if (hasCachedData === "true") {
-                const data = JSON.parse(sessionStorage.getItem("shop"));
-
-                //console.log("data fetched from cache");
-                this.renderGallery(data, options);
-            } else {
-                this.getShopData(collection, options);
-            }
-        }
+        this.getShopData(collection, options);
     },
     getShopOptions (collection) {
         const availableToSell = collection.dataset.prices;
@@ -46,13 +25,19 @@ const productListController = {
         };
     },
     getShopData (collection, options) {
-        const params = {
-            format: "json"
+        const config = {
+            headers: {
+                "Cache-Control": "no-cache, no-store, must-revalidate"
+            },
+            params: {
+                format: "json",
+                nocache: true
+            }
         };
 
         const url = collection.dataset.collection;
 
-        axios.get(`/${ url}`, { params })
+        axios.get(`/${ url}`, config)
             .then((response) => {
                 if (response.data.items.length > 0) {
                     sessionStorage.setItem("shop-data", true);
