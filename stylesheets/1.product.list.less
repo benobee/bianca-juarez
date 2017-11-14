@@ -1,0 +1,309 @@
+/* PRODUCT LIST VIEW*/
+
+.button-wrapper {
+    display: none;
+    margin-top: 2em;
+    &.active {
+        display: block;
+    }
+    &.centered {
+        text-align: center;
+    }
+    .load-more {
+        padding: 0.5em 1em;
+        background: @brand;
+        color: white;
+    }
+}
+
+.back-to-top.button-wrapper {
+    background-color: @brand-extra-light;
+    position: fixed;
+    bottom: 1rem;
+    height: 60px;
+    width: 60px;
+    right: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.4s, transform 0.2s;
+    visibility: visible;
+    &.hidden {
+        transform: translateY(150%);
+        opacity: 0;
+    }
+    .has-background-image {
+        background-image: url(https://static1.squarespace.com/static/5185253ce4b0a85f6b896998/t/59d6860712abd9ce1e53f111/1507231239231/chevron-up-240.png);
+        height: 30px;
+        width: 30px;
+        transform: translateY(-3px);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.app {
+    &.data-loaded {
+        .loading-wrapper {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .content {
+            opacity: 1;
+        }
+    }
+    .loading-wrapper {
+        position: fixed;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        transition: opacity 1s;
+        opacity: 1;
+        visibility: visible;
+        overflow-x: hidden;
+        .loader {
+            border: 6px solid @brand-extra-light;
+            border-top: 6px solid @brand;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            animation: spin 2s linear infinite;
+        }
+    }
+    .content {
+        position: relative;
+        opacity: 0;
+        transition: opacity 1s;
+        min-height: 80vh;
+        &.scrolling {
+            .filters {
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                @media screen and (max-width:@mobile-break) {
+                    top: 87px;
+                    overflow-y: auto;
+                    bottom: 0;
+                }
+                position:fixed;
+                top:0px;
+                max-width:1085px;
+                margin:0 auto;
+                left:0;
+                right:0;
+            }
+        }
+    }
+    .filters {
+        position: absolute;
+        top: -50px;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        width: 100%;
+        transition: 0.3s opacity ease-in-out;
+        &.hide {
+            opacity: 0;
+        }
+        @media screen and (min-width:769px) {
+            &:hover,
+            &:focus {
+                .tag.filter.has-tags {
+                    transform: translateX(0px) !important;
+                    opacity: 1 !important;
+                }
+            }
+        }
+        @media screen and (max-width:@mobile-break) {
+            overflow: hidden;
+            position: fixed;
+            top: 87px;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.5);
+            &:before {
+                content: "collections & filters";
+                background: @brand;
+                color: white;
+                text-align: center;
+                width: 100%;
+                line-height: 44px;
+                max-height: 45px;
+                height: 100%;
+                margin-top: 0em;
+                cursor: pointer;
+                border-bottom: 0px solid hsl(326, 57%, 50%);
+                position: absolute;
+            }
+            &.menu-open {
+                border-bottom: 0px solid hsl(326, 57%, 50%) !important;
+            }
+            &:not(.menu-open) {
+                max-height: 48px;
+                .filter {
+                    opacity: 0;
+                    height: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+        .filter {
+            transition: 0.3s opacity ease-in-out;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: center;
+            @media screen and (max-width: @mobile-break) {
+                flex-direction:row;
+                width: 100%;
+                margin-top: 48px;
+            }
+            .item {
+                margin-top: 0.5em;
+                padding: 0.5em 0.8em;
+                margin-right: 0.25em;
+                line-height: 1em;
+                cursor: pointer;
+                font-weight: 400;
+                @transition: 0.3s;
+                font-size:0.85em;
+                transition: color @transition, background @transition, opacity 0.6s;
+                border: 1px solid @lightgrey;
+                margin-bottom: 8px;
+                box-shadow: 1px 4px 10px rgba(200, 200, 200, 0.2);
+                @media screen and (max-width: @mobile-break) {
+                    width:100%;
+                    margin-bottom: 0;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    box-shadow: none;
+                    margin: 0;
+                }
+                .hoverState {
+                    border-color: @brand;
+                    color: @brand;
+                }
+                .activeState {
+                    border-color: @brand;
+                    background: @brand;
+                    color: white;
+                }
+                &:hover,
+                &:focus {
+                    .hoverState;
+                }
+                &.active {
+                    .activeState;
+                }
+            }
+            &.category {
+                background: rgba(255, 255, 255, 0.99);
+            }
+        }
+    }
+  
+    /* LIST GRID */
+    .product-list {
+        padding-top:1em;
+        margin:0 auto;
+        max-width:1050px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        transition: all 0.8s;
+        .item.product {
+            margin: 1em;
+            transition: opacity 1s ease-in-out, transform 0.6s ease-in-out;
+            &.list-complete-enter,
+            .list-complete-leave-to {
+                transform: translateY(20px);
+                visibility: hidden;
+                opacity: 0;
+            }
+            &.list-complete-leave-active {
+                transform: translateX(30px) scale(0.98);
+                position: absolute;
+                visibility: hidden;
+                opacity: 0;
+            }
+            opacity:1;
+            .inner-content {
+                position: relative;
+                .media-wrapper {
+                    display: flex;
+                    align-items: stretch;
+                    justify-content: center;
+                    background: rgba(255, 255, 255, 0.8);
+                    max-height: 300px;
+                    img {
+                        width:100%;
+                        height:auto;
+                        &.loaded {
+                            opacity: 1;
+                        }
+                        opacity:0;
+                        object-fit:contain;
+                        min-height:100%;
+                        transition:opacity 0.8s;
+                    }
+                }
+                .product-info {
+                    opacity: 0;
+                    text-align: center;
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    transition: opacity 0.6s ease-in-out;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+                .product-title {
+                    text-align: center;
+                    width: 100%;
+                    font-family: futura-pt;
+                    font-weight: 600;
+                    font-style: normal;
+                    font-size: 16px;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                    color: @brand;
+                    text-transform: uppercase;
+                }
+            }
+            &:hover,
+            &:focus {
+                outline: 3px !important;
+                .media-wrapper {
+                    img {
+                        opacity: 0.1 !important;
+                    }
+                }
+                .product-info {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
